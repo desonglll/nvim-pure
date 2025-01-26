@@ -12,7 +12,7 @@ return {
                         node_decremental = "V",
                     },
                 },
-                ensure_installed = { "c", "lua", "vim", "vimdoc", "rust" },
+                ensure_installed = {},
                 sync_install = false,
                 highlight = { enable = true },
                 indent = { enable = true },
