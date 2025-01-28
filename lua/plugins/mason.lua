@@ -8,32 +8,45 @@ return {
     {
         "williamboman/mason-lspconfig.nvim",
         config = function()
-            local is_aarch64 = vim.fn.system("uname -m"):match("aarch64") ~= nil
-
-            local lsp_list = {
-                -- unpack(is_aarch64 and {} or { "clangd" }), -- 如果是 armlinux，则不安装 clangd
-                -- "lua_ls", -- For Lua
-                -- "ts_ls",
-                -- "bashls",
-                -- "jdtls",
-                -- auto install rust_analyzer
-                -- "rust_analyzer"
-            }
+            -- 配置 Mason LSP 自动安装
             require("mason-lspconfig").setup({
-                ensure_installed = lsp_list,
-                automatic_installation = true,
+                automatic_installation = true, -- 启用自动安装
             })
-            for _, lsp in ipairs(lsp_list) do
-                require("lspconfig")[lsp].setup({
+
+            -- 获取所有可用的 LSP 服务器名称
+            local lsp_servers = require("mason-lspconfig").get_installed_servers()
+
+            -- 为每个已安装的 LSP 配置基础设置
+            for _, server_name in ipairs(lsp_servers) do
+                -- 特殊配置示例（可按需扩展）
+                local server_opts = {
                     on_attach = function(client, bufnr)
-                        -- 这里可以添加你的 LSP 相关设置
+                        -- 通用 LSP 绑定配置
+                        local opts = { noremap = true, silent = true, buffer = bufnr }
+                        vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+                        vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+                        -- 更多绑定...
                     end,
+                    capabilities = require("cmp_nvim_lsp").default_capabilities(),
                     flags = {
                         debounce_text_changes = 150,
-                    },
-                    -- 可以在这里添加其他配置项
-                })
+                    }
+                }
+
+                -- 特定语言服务器的定制配置
+                if server_name == "lua_ls" then
+                    server_opts.settings = {
+                        Lua = {
+                            diagnostics = {
+                                globals = { "vim" }
+                            }
+                        }
+                    }
+                end
+
+                -- 应用配置
+                require("lspconfig")[server_name].setup(server_opts)
             end
-        end,
+        end
     }
 }
