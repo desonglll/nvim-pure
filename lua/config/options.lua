@@ -9,3 +9,4 @@ vim.o.expandtab = true -- 将制表符转换为空格
 
 vim.opt.iskeyword:append({ "-", "_" })
 vim.opt.termguicolors = true
+
