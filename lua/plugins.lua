@@ -8,11 +8,11 @@ Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
+Plug 'onsails/lspkind.nvim'
 Plug 'hrsh7th/nvim-cmp'
 
 Plug 'L3MON4D3/LuaSnip'
 Plug 'saadparwaiz1/cmp_luasnip'
-
 
 Plug 'williamboman/mason.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'
@@ -20,6 +20,5 @@ Plug 'williamboman/mason-lspconfig.nvim'
 call plug#end()
 ]])
 
-require("plugins.nvim-cmp")
-require("plugins.mason")
-require("plugins.mason-lspconfig")
+require("config.nvim-cmp")
+require("config.mason")
