@@ -17,8 +17,36 @@ Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'williamboman/mason.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'
 
+Plug 'nvim-treesitter/nvim-treesitter'
+
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-tree/nvim-web-devicons'
+Plug 'MunifTanjim/nui.nvim'
+Plug 'nvim-neo-tree/neo-tree.nvim'
+
+
+Plug 'akinsho/toggleterm.nvim'
+
+Plug 'windwp/nvim-autopairs'
+
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+
+Plug 'stevearc/conform.nvim'
+Plug 'zapling/mason-conform.nvim'
+
+
 call plug#end()
 ]])
 
 require("config.nvim-cmp")
 require("config.mason")
+require("config.nvim-treesitter")
+require("config.toggleterm")
+require("config.neo-tree")
+require("config.telescope")
+require("config.conform")
+
+require("nvim-autopairs").setup {}
+require("mason-conform").setup({})
+

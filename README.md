@@ -1,4 +1,6 @@
+## Ensure
 
+ripgrep
 
 ## Delete cache files
 

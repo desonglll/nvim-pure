@@ -2,6 +2,7 @@ require("mason-lspconfig").setup({
     automatic_installation = true, -- 启用自动安装
 })
 
+
 -- 获取所有可用的 LSP 服务器名称
 local lsp_servers = require("mason-lspconfig").get_installed_servers()
 

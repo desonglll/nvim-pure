@@ -10,6 +10,7 @@ local has_words_before = function()
         nil
 end
 cmp.setup({
+    preselect = cmp.PreselectMode.Item, -- 让补全窗口打开时自动选中第一个候选项
     snippet = {
         expand = function(args)
             require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
@@ -26,8 +27,17 @@ cmp.setup({
     mapping = cmp.mapping.preset.insert({
         ["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
         ["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
-        ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-        ["<C-f>"] = cmp.mapping.scroll_docs(4),
+        -- TODO Enter body
+        ["<S-k>"] = function ()
+            if cmp.visible_docs() then
+                cmp.close_docs()
+            else
+                cmp.open_docs()
+            end
+        end,
+        ["<C-y>"] = cmp.mapping.confirm(),
+        ["<C-k>"] = cmp.mapping.scroll_docs(-4),
+        ["<C-j>"] = cmp.mapping.scroll_docs(4),
         ["<C-o>"] = cmp.mapping.complete(),
         ["<C-e>"] = cmp.mapping.abort(),
         ["<CR>"] = cmp.mapping.confirm({ select = false }),
