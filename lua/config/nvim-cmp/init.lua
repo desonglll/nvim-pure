@@ -1,6 +1,7 @@
 -- For cmp
 local cmp = require('cmp')
 local lspkind = require('lspkind')
+local luasnip = require("luasnip")
 
 local has_words_before = function()
     unpack = unpack or table.unpack

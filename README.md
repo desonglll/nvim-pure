@@ -1,6 +1,8 @@
 ## Ensure
 
 ripgrep
+unzip
+nodejs(npm)
 
 ## Delete cache files
 
