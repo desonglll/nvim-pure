@@ -23,7 +23,7 @@ local keymaps = {
     { "[d", function() vim.diagnostic.goto_prev() end, "Go to previous diagnostic", "n" },
     { "]d", function() vim.diagnostic.goto_next() end, "Go to next diagnostic", "n" },
     { "<M-d>", function() vim.diagnostic.open_float() end, "Open diagnostic float", "n" },
-    { "<leader>ca", function() vim.lsp.buf.code_action() end, "Show code actions", "n" },
+    { "<M-a>", function() vim.lsp.buf.code_action() end, "Show code actions", "n" },
 }
 
 -- Apply the key mappings

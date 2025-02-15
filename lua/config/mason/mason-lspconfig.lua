@@ -1,17 +1,31 @@
-require("mason-lspconfig").setup({
-    automatic_installation = true, -- 启用自动安装
+local mason_lspconfig = require("mason-lspconfig")
+local lspconfig = require("lspconfig")
+local coq = require("coq")
+
+-- 确保安装的 LSP
+mason_lspconfig.setup({
+    automatic_installation = true,
     ensure_installed = {
         "lua_ls",
         "rust_analyzer",
-        "pyright"
-    }
+        "pyright",
+        "ts_ls", -- 确保 TypeScript LSP 被安装
+    },
 })
 
+-- 处理 LSP 配置
+mason_lspconfig.setup_handlers({
+    -- 默认 LSP 配置
+    function(server_name)
+        lspconfig[server_name].setup(coq.lsp_ensure_capabilities({
+        }))
+    end,
 
--- 获取所有可用的 LSP 服务器名称
-local lsp_servers = require("mason-lspconfig").get_installed_servers()
+    -- TypeScript 专属配置
+    ["ts_ls"] = function()
+        lspconfig.ts_ls.setup({
+            filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
+        })
+    end,
+})
 
--- 为每个已安装的 LSP 配置基础设置
-for _, server_name in ipairs(lsp_servers) do
-    require("lspconfig")[server_name].setup({})
-end

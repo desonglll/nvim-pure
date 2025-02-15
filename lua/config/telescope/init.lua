@@ -5,3 +5,4 @@ vim.keymap.set('n', '<leader>b', builtin.buffers, { desc = 'Telescope buffers' }
 vim.keymap.set('n', '<leader>h', builtin.help_tags, { desc = 'Telescope help tags' })
 vim.keymap.set('n', '<leader>r', builtin.oldfiles, { desc = 'Recent files' })
 vim.keymap.set('n', '<leader>d', builtin.diagnostics, { desc = 'Diagnostics' })
+vim.keymap.set('n', 'gd', builtin.lsp_definitions, { desc = 'Definition' })
