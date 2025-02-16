@@ -27,12 +27,15 @@ Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
 Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
 Plug 'ms-jpq/coq.thirdparty', {'branch': '3p'}
 
+Plug 'nvim-tree/nvim-web-devicons' " Recommended (for coloured icons)
+Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
+
 call plug#end()
 ]])
 
 vim.g.coq_settings = {
-    auto_start = true, -- if you want to start COQ at startup
-    -- Your COQ settings here
+	auto_start = true, -- if you want to start COQ at startup
+	-- Your COQ settings here
 }
 
 require("config.mason")
@@ -41,5 +44,9 @@ require("config.toggleterm")
 require("config.neo-tree")
 require("config.telescope")
 require("config.conform")
-require("nvim-autopairs").setup {}
+require("nvim-autopairs").setup({})
 require("mason-conform").setup({})
+
+-- For bufferline
+vim.cmd([[set termguicolors]])
+require("bufferline").setup({})

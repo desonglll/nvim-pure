@@ -1,8 +1,16 @@
 ## Ensure
 
 ripgrep
+
 unzip
+
 nodejs(npm)
+
+### Formatters
+
+prettier
+
+deno
 
 ## Delete cache files
 
