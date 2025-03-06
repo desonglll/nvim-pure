@@ -1,6 +1,6 @@
 require("neo-tree").setup({
 	window = {
-		position = "float",
+		position = "left",
 		width = 25,
 		mapping_options = {
 			noremap = true,
@@ -28,4 +28,4 @@ require("neo-tree").setup({
 	},
 })
 
-vim.keymap.set("n", "<M-e>", ":Neotree toggle<cr>")
+vim.keymap.set("n", "<Leader>e", ":Neotree toggle<cr>")

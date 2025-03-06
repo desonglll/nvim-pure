@@ -30,6 +30,11 @@ Plug 'ms-jpq/coq.thirdparty', {'branch': '3p'}
 Plug 'nvim-tree/nvim-web-devicons' " Recommended (for coloured icons)
 Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
 
+Plug 'folke/tokyonight.nvim'
+Plug 'xiyaowong/transparent.nvim'
+
+Plug 'chomosuke/typst-preview.nvim', {'tag': 'v1.*'}
+
 call plug#end()
 ]])
 
@@ -49,4 +54,65 @@ require("mason-conform").setup({})
 
 -- For bufferline
 vim.cmd([[set termguicolors]])
+vim.cmd.colorscheme("tokyonight")
+
 require("bufferline").setup({})
+
+-- Optional, you don't have to run setup.
+require("transparent").setup({
+	-- table: default groups
+	groups = {
+		"Normal",
+		"NormalNC",
+		"Comment",
+		"Constant",
+		"Special",
+		"Identifier",
+		"Statement",
+		"PreProc",
+		"Type",
+		"Underlined",
+		"Todo",
+		"String",
+		"Function",
+		"Conditional",
+		"Repeat",
+		"Operator",
+		"Structure",
+		"LineNr",
+		"NonText",
+		"SignColumn",
+		"CursorLine",
+		"CursorLineNr",
+		"StatusLine",
+		"StatusLineNC",
+		"EndOfBuffer",
+	},
+	-- table: additional groups that should be cleared
+	extra_groups = {},
+	-- table: groups you don't want to clear
+	exclude_groups = {},
+	-- function: code to be executed after highlight groups are cleared
+	-- Also the user event "TransparentClear" will be triggered
+	on_clear = function() end,
+})
+
+require("tokyonight").setup({
+	transparent = vim.g.transparent_enabled,
+	styles = {
+		sidebars = "transparent",
+		floats = "transparent",
+	},
+	-- use the night style
+	style = "night",
+	-- Change the "hint" color to the "orange" color, and make the "error" color bright red
+	on_colors = function(colors)
+		colors.hint = colors.orange
+		colors.error = "#ff0000"
+	end,
+})
+
+vim.api.nvim_set_keymap("n", "<leader>t", ":TransparentToggle<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>p", function()
+	require("typst-preview").preview()
+end, { noremap = true, silent = true })
